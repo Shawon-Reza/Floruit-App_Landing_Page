@@ -1,0 +1,122 @@
+import React, { useState } from 'react'
+import { FaPhone, FaEnvelope, FaLocationDot, FaPaperPlane } from 'react-icons/fa6'
+
+const contactDetails = [
+    {
+        icon: <FaPhone className="text-blue-500 text-base mt-0.5 shrink-0" />,
+        label: 'Phone',
+        value: '+81 11-123-4567',
+    },
+    {
+        icon: <FaEnvelope className="text-blue-500 text-base mt-0.5 shrink-0" />,
+        label: 'Email',
+        value: 'info@hokkaidotaxi.com',
+    },
+    {
+        icon: <FaLocationDot className="text-blue-500 text-base mt-0.5 shrink-0" />,
+        label: 'Address',
+        value: 'Chuo-ku, Sapporo, Hokkaido 060-0001, Japan',
+    },
+]
+
+const ContactPaage = () => {
+    const [form, setForm] = useState({ name: '', email: '', message: '' })
+
+    const handleChange = (e) =>
+        setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        // handle submission
+    }
+
+    return (
+        <section className="w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+            <div className=" mx-auto">
+
+                {/* Badge */}
+                <div className="flex justify-center mb-5">
+                    <span className="border border-gray-300 text-gray-600 text-xs sm:text-sm font-medium px-4 py-1.5 rounded-full">
+                        contact us
+                    </span>
+                </div>
+
+                {/* Heading */}
+                <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 text-center mb-12">
+                    Get in Touch
+                </h2>
+
+                {/* Two-column layout */}
+                <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
+
+                    {/* Form card */}
+                    <div className="w-full lg:w-1/2 bg-gray-50 border border-gray-200 rounded-2xl p-6 sm:p-8">
+                        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                            <div className="flex flex-col gap-1.5">
+                                <label className="text-sm font-medium text-gray-700">Your Name</label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={form.name}
+                                    onChange={handleChange}
+                                    placeholder="write Your Name"
+                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-1.5">
+                                <label className="text-sm font-medium text-gray-700">Your Email</label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={form.email}
+                                    onChange={handleChange}
+                                    placeholder="write Your Email"
+                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-1.5">
+                                <label className="text-sm font-medium text-gray-700">Message</label>
+                                <textarea
+                                    name="message"
+                                    value={form.message}
+                                    onChange={handleChange}
+                                    placeholder="write Your Message"
+                                    rows={5}
+                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition resize-none"
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                className="self-start flex items-center gap-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-colors duration-200"
+                            >
+                                <FaPaperPlane />
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+
+                    {/* Contact info */}
+                    <div className="w-full lg:w-1/2 flex flex-col justify-center gap-8">
+                        <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                            Have questions or special requirements? Our customer service team is available 24/7 to assist you with your Hokkaido journey.
+                        </p>
+                        <ul className="flex flex-col gap-5">
+                            {contactDetails.map(({ icon, label, value }) => (
+                                <li key={label} className="flex items-start gap-3">
+                                    {icon}
+                                    <div>
+                                        <p className="text-sm font-semibold text-gray-900">{label}</p>
+                                        <p className="text-sm text-gray-500">{value}</p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    )
+}
+
+export default ContactPaage
