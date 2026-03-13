@@ -4,7 +4,7 @@ import ImagePardHeroSection from './ImagePardHeroSection'
 
 const HeroPage = () => {
   return (
-    <div>
+    <div className='min-h-screen xl:px-6'>
       <section>
         <Header></Header>
       </section>

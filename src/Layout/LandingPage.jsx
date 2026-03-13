@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import AboutPage from "../features/aboutPage/AboutPage"
@@ -13,35 +14,48 @@ import Transparency from "../features/transParency/Transparency"
 
 
 const LandingPage = () => {
+    const [isLoaded, setIsLoaded] = useState(false)
+
+    useEffect(() => {
+        // Reset scroll position on refresh, then trigger intro animation.
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+        const timer = setTimeout(() => setIsLoaded(true), 70)
+
+        return () => clearTimeout(timer)
+    }, [])
+
+
     return (
-        <div>
-            <nav>
-                <Navbar />
-            </nav>
-            <section>
+        <>
+            <Navbar />
+            <div className={`pt-20 landing-intro ${isLoaded ? 'landing-intro-loaded' : ''}`}>
+            <section
+                id="home"
+                className={`hero-intro ${isLoaded ? 'hero-intro-loaded' : ''}`}
+            >
                 <HeroPage />
             </section>
-            <section>
+            <section id="how-it-work">
                 <HowItWork />
             </section>
 
-            <section>
+            <section id="feature">
                 <PowerfullFeature />
             </section>
 
-            <section>
+            <section id="transparency">
                 <Transparency />
             </section>
-            <section>
+            <section id="privacy-security">
                 <PrivacyAndSecurity />
             </section>
-            <section>
+            <section id="about">
                 <AboutPage />
             </section>
-            <section>
+            <section id="contact">
                 <ContactPaage />
             </section>
-            <section>
+            <section id="get-started">
                 <PlaystoreDownloadPage />
             </section>
 
@@ -49,6 +63,7 @@ const LandingPage = () => {
                 <Footer />
             </section>
         </div>
+        </>
     )
 }
 

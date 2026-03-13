@@ -43,7 +43,7 @@ const features = [
 
 const PrivacyAndSecurity = () => {
   return (
-    <section className="w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+    <section className="w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-24 xl:px-10">
       <div className=" mx-auto">
 
         {/* Badge */}
@@ -68,10 +68,13 @@ const PrivacyAndSecurity = () => {
           {features.map(({ icon, title, description }) => (
             <div
               key={title}
-              className="flex flex-col items-center text-center gap-3 bg-gray-50 border border-gray-100 rounded-2xl px-6 py-8"
+              className="group relative overflow-hidden flex flex-col items-center text-center gap-3 rounded-2xl border border-gray-100 bg-gray-50 px-6 py-8 transition-all duration-700 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-100/70"
             >
-              {icon}
-              <h3 className="text-sm sm:text-base font-bold text-gray-900">{title}</h3>
+              <span className="pointer-events-none absolute inset-0 bg-gradient-to-br from-blue-50/0 via-blue-50/0 to-blue-100/30 opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+              <div className="relative transition-transform duration-700 group-hover:scale-110">
+                {icon}
+              </div>
+              <h3 className="text-sm sm:text-base md:text-lg xl:text-xl font-bold text-gray-900">{title}</h3>
               <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
             </div>
           ))}

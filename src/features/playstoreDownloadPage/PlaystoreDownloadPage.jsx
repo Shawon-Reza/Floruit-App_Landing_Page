@@ -3,9 +3,9 @@ import { FaGooglePlay } from 'react-icons/fa6'
 
 const PlaystoreDownloadPage = () => {
   return (
-    <section className="w-full px-4 sm:px-6 lg:px-8 py-8">
+    <section className="w-full ">
       <div
-        className="relative w-full overflow-hidden rounded-2xl bg-blue-500 flex flex-col items-center text-center px-6 py-14 sm:py-16"
+        className="relative w-full overflow-hidden  bg-blue-500 flex flex-col items-center text-center px-6 py-14 sm:py-16"
       >
         {/* Decorative concentric arcs (SVG background) */}
         <svg
@@ -37,7 +37,7 @@ const PlaystoreDownloadPage = () => {
           </p>
           <a
             href="#playstore"
-            className="mt-2 inline-flex items-center gap-2.5 bg-white hover:bg-gray-50 text-gray-800 text-sm font-semibold px-6 py-2.5 rounded-xl shadow-sm transition-colors duration-200"
+            className="mt-2 inline-flex items-center gap-2.5 bg-white hover:bg-gray-50 text-[#2B7FFF] text-sm font-semibold px-6 py-2.5 rounded-xl shadow-sm transition-colors duration-200"
           >
             <FaGooglePlay className="text-lg text-green-500" />
             Get on playstore

@@ -27,11 +27,11 @@ const ContactPaage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // handle submission
+        console.log('Contact Form Data:', form)
     }
 
     return (
-        <section className="w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <section className="w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-24  xl:px-10">
             <div className=" mx-auto">
 
                 {/* Badge */}
@@ -47,10 +47,10 @@ const ContactPaage = () => {
                 </h2>
 
                 {/* Two-column layout */}
-                <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
+                <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
 
                     {/* Form card */}
-                    <div className="w-full lg:w-1/2 bg-gray-50 border border-gray-200 rounded-2xl p-6 sm:p-8">
+                    <div className="w-full lg:w-1/2 bg-white border border-gray-200 rounded-3xl shadow-lg p-6 sm:p-8">
                         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                             <div className="flex flex-col gap-1.5">
                                 <label className="text-sm font-medium text-gray-700">Your Name</label>
@@ -60,7 +60,7 @@ const ContactPaage = () => {
                                     value={form.name}
                                     onChange={handleChange}
                                     placeholder="write Your Name"
-                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                                    className="w-full bg-[#F5F5F5]  border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
                                 />
                             </div>
                             <div className="flex flex-col gap-1.5">
@@ -71,7 +71,7 @@ const ContactPaage = () => {
                                     value={form.email}
                                     onChange={handleChange}
                                     placeholder="write Your Email"
-                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                                    className="w-full bg-[#F5F5F5]  border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
                                 />
                             </div>
                             <div className="flex flex-col gap-1.5">
@@ -82,7 +82,7 @@ const ContactPaage = () => {
                                     onChange={handleChange}
                                     placeholder="write Your Message"
                                     rows={5}
-                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition resize-none"
+                                    className="w-full bg-[#F5F5F5]  border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition resize-none"
                                 />
                             </div>
                             <button

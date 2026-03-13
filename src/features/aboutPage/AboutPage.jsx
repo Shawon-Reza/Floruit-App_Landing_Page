@@ -2,7 +2,7 @@ import React from 'react'
 
 const AboutPage = () => {
     return (
-        <section className="w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <section className="w-full px-4 sm:px-6 lg:px-8 py-5 xl:px-10">
             <div className=" mx-auto bg-blue-50 rounded-3xl px-6 sm:px-10 py-12 sm:py-16">
 
                 {/* Badge + Heading */}

@@ -1,1 +1,199 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: 'customfont';
+    src: url('./assets/fonts/Poppins-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/*  Set custom font in overall content......... */
+:root {
+    --font-customfont: 'customfont', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+body {
+    font-family: var(--font-customfont);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+section[id] {
+    scroll-margin-top: 96px;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.25s ease both;
+}
+
+@keyframes slide-text-in {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.985);
+        filter: blur(6px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(-2px) scale(1.002);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+.animate-slide-text-in {
+    animation: slide-text-in 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes phone-screen-swap {
+    0% {
+        opacity: 0;
+        transform: translateY(18px) scale(0.96);
+        filter: blur(7px);
+    }
+
+    55% {
+        opacity: 1;
+        transform: translateY(-3px) scale(1.015);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+.animate-phone-screen-swap {
+    animation: phone-screen-swap 640ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    transform-origin: 50% 90%;
+}
+
+@keyframes crossfade-text-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes crossfade-text-out {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+}
+
+.animate-crossfade-text-in {
+    animation: crossfade-text-in 650ms ease-out both;
+}
+
+.animate-crossfade-text-out {
+    animation: crossfade-text-out 650ms ease-out both;
+}
+
+@keyframes crossfade-screen-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes crossfade-screen-out {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.985);
+    }
+}
+
+.animate-crossfade-screen-in {
+    animation: crossfade-screen-in 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-crossfade-screen-out {
+    animation: crossfade-screen-out 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+
+/*==================================== Landing page refresh intro ============================*/
+.landing-intro {   /* Used in navabr bottom to top */
+    opacity: 0;
+    transform: translateY(0px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform;
+}
+
+.landing-intro-loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-intro {
+    opacity: 0;
+    transform: translateY(40px) scale(0.99);
+    transition: opacity 1s ease-out 0.15s, transform 1s ease-out 0.15s;
+    will-change: opacity, transform;
+}
+
+.hero-intro-loaded {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .landing-intro,
+    .hero-intro,
+    .animate-slide-text-in,
+    .animate-phone-screen-swap,
+    .animate-crossfade-text-in,
+    .animate-crossfade-text-out,
+    .animate-crossfade-screen-in,
+    .animate-crossfade-screen-out {
+        opacity: 1;
+        transform: none;
+        transition: none;
+        animation: none;
+        filter: none;
+    }
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import logo from '../assets/logo.png'
 
 const navLinks = [
@@ -9,9 +9,9 @@ const navLinks = [
 ]
 
 const Logo = () => (
-  <a href="/" className="flex items-center gap-2 shrink-0">
+  <a href="/" className="flex items-center gap-3 shrink-0">
     <figure>
-      <img src={logo} alt="Floruit Logo" className="h-8 w-8" />
+      <img src={logo} alt="Floruit Logo" className="h-10 w-10" />
     </figure>
     <span className="text-lg font-bold text-gray-900 tracking-tight">Floruit</span>
   </a>
@@ -19,9 +19,30 @@ const Logo = () => (
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const scrollToSection = (event, href) => {
+    if (!href.startsWith('#')) return
+    const target = document.querySelector(href)
+    if (!target) return
+
+    event.preventDefault()
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    setMenuOpen(false)
+  }
 
   return (
-    <nav className="w-full bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+    <nav className={`w-full fixed top-0 left-0 right-0 z-50 py-1 xl:px-6 border-b transition-all duration-300 ${
+      scrolled
+        ? 'bg-white/30 backdrop-blur-md border-gray-200 shadow-sm'
+        : 'bg-white border-gray-100 shadow-sm'
+    }`}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
 
@@ -34,7 +55,8 @@ const Navbar = () => {
               <li key={label}>
                 <a
                   href={href}
-                  className="text-gray-600 text-sm font-medium hover:text-blue-600 transition-colors duration-200"
+                  onClick={(event) => scrollToSection(event, href)}
+                  className="text-gray-600 text-sm md:text-md  lg:text-lg font-medium hover:text-blue-600 transition-colors duration-200"
                 >
                   {label}
                 </a>
@@ -46,6 +68,7 @@ const Navbar = () => {
           <div className="hidden md:block">
             <a
               href="#get-started"
+              onClick={(event) => scrollToSection(event, '#get-started')}
               className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors duration-200"
             >
               Get started
@@ -80,7 +103,7 @@ const Navbar = () => {
               <li key={label}>
                 <a
                   href={href}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={(event) => scrollToSection(event, href)}
                   className="block text-gray-600 text-sm font-medium py-2 px-3 rounded-lg hover:text-blue-600 hover:bg-blue-50 transition-colors duration-200"
                 >
                   {label}
@@ -90,7 +113,7 @@ const Navbar = () => {
           </ul>
           <a
             href="#get-started"
-            onClick={() => setMenuOpen(false)}
+            onClick={(event) => scrollToSection(event, '#get-started')}
             className="mt-3 block text-center bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors duration-200"
           >
             Get started
