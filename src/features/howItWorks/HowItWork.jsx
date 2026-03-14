@@ -47,7 +47,7 @@ const HowItWork = () => {
                         <div
                             key={title}
                             // border border-gray-100 bg-gray-50
-                            className="group relative overflow-hidden flex flex-col items-center text-center gap-4 rounded-2xl  px-5 py-7 transition-all duration-700 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-100/70"
+                            className="border border-gray-100 bg-gray-50     group relative overflow-hidden flex flex-col items-center text-center gap-4 rounded-2xl  px-5 py-7 transition-all duration-700 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-100/70"
                         >
                             <span className="pointer-events-none absolute inset-0 bg-gradient-to-br from-blue-50/0 via-blue-50/0 to-blue-100/30 opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
                             <div className="relative w-16 h-16 flex items-center justify-center rounded-2xl transition-transform duration-700 group-hover:scale-110">

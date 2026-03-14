@@ -21,7 +21,7 @@ const Transparency = () => {
           <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">
             AI Assistance
           </h2>
-          <p className="my-5 xl:mb-20 max-w-3xl text-sm leading-relaxed text-gray-600 sm:text-base lg:text-lg">
+          <p className="my-5 xl:mb-5 max-w-3xl text-sm leading-relaxed text-gray-600 sm:text-base lg:text-lg">
             This app use artificial intelligence to provide tone suggestion and communication insights.
           </p>
         </div>
@@ -42,12 +42,12 @@ const Transparency = () => {
             </ul>
           </div>
 
-          <div className="flex w-full justify-center lg:w-5/12 lg:justify-end">
-            <div className="w-full lg:relative max-w-[280px] sm:max-w-[320px] lg:max-w-[360px]">
+          <div className="flex w-full justify-end lg:w-5/12 lg:justify-end">
+            <div className="w-full lg:relative ">
               <img
                 src={transparencyimg}
                 alt="Transparency"
-                className="ml-auto lg:absolute lg:-top-57 xl:-top-46 block h-auto w-full object-contain"
+                className="ml-auto lg:absolute  lg:-top-57 xl:-top-46 block h-auto w-full object-contain scale-110 max-h-[400px]"
               />
             </div>
           </div>

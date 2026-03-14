@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import Milestones_Journal from "../../assets/Milestones_Journal.png"
+import Secure_Messaging from "../../assets/Secure_Messaging.png"
+import Shared_Expenses from "../../assets/Shared_Expenses.png"
+import Shared_Schedule from "../../assets/Shared_Schedule.png"
 
-const INTERVAL_MS = 2000
-const TRANSITION_MS = 650
+const INTERVAL_MS = 3000
+const TRANSITION_MS = 950
 
 // ── Phone screen components ───────────────────────────────────────
 
@@ -156,21 +160,29 @@ const slides = [
     {
         title: 'Secure Messaging with Ai Tone Analyses',
         description: 'Secure, end-to-end encrypted chats with full history— always protected and accessible. AI offers optional tips for respectful communication.',
+        image: Secure_Messaging,
+        imageAlt: 'Secure messaging preview',
         Screen: MessagingScreen,
     },
     {
         title: 'Milestones Journal',
         description: 'Capture important moments with photos, notes and timestamps. Each entry records who added it, creating a clear and shared timeline.',
+        image: Milestones_Journal,
+        imageAlt: 'Milestones journal preview',
         Screen: MilestonesScreen,
     },
     {
         title: 'Shared Schedule',
         description: 'Organise events, appointments and activities in one central calendar. View upcoming plans, track locations and receive reminders.',
+        image: Shared_Schedule,
+        imageAlt: 'Shared schedule preview',
         Screen: ScheduleScreen,
     },
     {
         title: 'Shared Expenses',
         description: 'Monitor shared costs, payment status and spending breakdowns in one transparent view.',
+        image: Shared_Expenses,
+        imageAlt: 'Shared expenses preview',
         Screen: ExpensesScreen,
     },
 ]
@@ -215,12 +227,14 @@ const MessagingCard = () => {
         })
     }
 
-    const { title, description, Screen } = slides[active]
+    const { title, description, Screen, image, imageAlt } = slides[active]
     const previousSlide = previous !== null ? slides[previous] : null
     const PreviousScreen = previousSlide?.Screen
+    const previousImage = previousSlide?.image
+    const previousImageAlt = previousSlide?.imageAlt
 
     return (
-        <div className="bg-gray-50 rounded-3xl p-7 flex flex-col overflow-hidden">
+        <div className="bg-gray-50 rounded-3xl p-7 flex min-h-156 flex-col overflow-hidden sm:min-h-164">
 
             {/* Pagination dots */}
             <div className="flex gap-2 mb-6">
@@ -239,30 +253,44 @@ const MessagingCard = () => {
                 {previousSlide && isTransitioning && (
                     <div className="absolute inset-0 animate-crossfade-text-out pointer-events-none">
                         <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">{previousSlide.title}</h3>
-                        <p className="text-gray-500 text-sm leading-relaxed">{previousSlide.description}</p>
+                        <p className="text-gray-500 text-sm  leading-relaxed">{previousSlide.description}</p>
                     </div>
                 )}
 
                 <div className={isTransitioning ? 'animate-crossfade-text-in' : ''}>
-                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">{title}</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">{description}</p>
+                    <h3 className="text-xl xl:text-2xl sm:text-2xl font-bold text-gray-900 mb-3">{title}</h3>
+                    <p className="text-gray-500 text-sm xl:text-lg leading-relaxed">{description}</p>
                 </div>
             </div>
 
             {/* Phone mockup */}
-            <div className="flex flex-1 items-end justify-center">
-                <div className="relative w-56 sm:w-64 overflow-hidden rounded-4xl border border-gray-100 bg-white px-3 pt-4 pb-0 shadow-2xl">
-                    <div className="mx-auto mb-3 h-3.5 w-14 rounded-full bg-gray-900" />
-
-                    <div className="relative grid">
+            <div className="flex flex-1 items-center justify-center">
+                <div className="relative flex h-88 w-full items-center justify-center sm:h-96">
+                    <div className="relative grid h-full w-full place-items-center">
                         {PreviousScreen && isTransitioning && (
-                            <div className="col-start-1 row-start-1 animate-crossfade-screen-out pointer-events-none">
-                                <PreviousScreen />
+                            <div className="col-start-1 row-start-1 flex h-full w-full items-center justify-center animate-crossfade-screen-out pointer-events-none">
+                                {previousImage ? (
+                                    <img
+                                        src={previousImage}
+                                        alt={previousImageAlt}
+                                        className="block h-full w-auto max-w-full object-contain"
+                                    />
+                                ) : (
+                                    <PreviousScreen />
+                                )}
                             </div>
                         )}
 
-                        <div className={`col-start-1 row-start-1 ${isTransitioning ? 'animate-crossfade-screen-in' : ''}`}>
-                            <Screen />
+                        <div className={`col-start-1 row-start-1 flex h-full w-full items-center justify-center ${isTransitioning ? 'animate-crossfade-screen-in' : ''}`}>
+                            {image ? (
+                                <img
+                                    src={image}
+                                    alt={imageAlt}
+                                    className="block h-full w-auto max-w-full object-contain"
+                                />
+                            ) : (
+                                <Screen />
+                            )}
                         </div>
                     </div>
                 </div>

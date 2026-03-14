@@ -21,14 +21,68 @@ const contactDetails = [
 
 const ContactPaage = () => {
     const [form, setForm] = useState({ name: '', email: '', message: '' })
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [submitMessage, setSubmitMessage] = useState('')
 
     const handleChange = (e) =>
         setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log('Contact Form Data:', form)
+        const trimmedForm = {
+            name: form.name.trim(),
+            email: form.email.trim(),
+            message: form.message.trim(),
+        }
+
+        if (!trimmedForm.name || !trimmedForm.email || !trimmedForm.message) {
+            setSubmitMessage('All fields are required.')
+            return
+        }
+
+        setIsSubmitting(true)
+        setSubmitMessage('')
+
+        try {
+            console.log('Submitting contact form payload:', trimmedForm)
+
+            const response = await fetch('http://10.10.13.61:8002/support/form-submit/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(trimmedForm),
+            })
+
+            const contentType = response.headers.get('content-type') || ''
+            const data = contentType.includes('application/json')
+                ? await response.json().catch(() => null)
+                : await response.text().catch(() => '')
+
+            console.log('Contact form response:', {
+                status: response.status,
+                ok: response.ok,
+                data,
+            })
+
+            if (!response.ok) {
+                const errorMessage =
+                    (data && typeof data === 'object' && (data.detail || data.message || data.error)) ||
+                    `Request failed with status ${response.status}`
+                throw new Error(errorMessage)
+            }
+
+            setSubmitMessage('Message sent successfully.')
+            setForm({ name: '', email: '', message: '' })
+        } catch (error) {
+            console.error('Contact form submit failed:', error)
+            setSubmitMessage(error.message || 'Failed to send message. Please try again.')
+        } finally {
+            setIsSubmitting(false)
+        }
     }
+
+
 
     return (
         <section className="w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-24  xl:px-10">
@@ -57,6 +111,7 @@ const ContactPaage = () => {
                                 <input
                                     type="text"
                                     name="name"
+                                    required
                                     value={form.name}
                                     onChange={handleChange}
                                     placeholder="write Your Name"
@@ -68,6 +123,7 @@ const ContactPaage = () => {
                                 <input
                                     type="email"
                                     name="email"
+                                    required
                                     value={form.email}
                                     onChange={handleChange}
                                     placeholder="write Your Email"
@@ -78,6 +134,7 @@ const ContactPaage = () => {
                                 <label className="text-sm font-medium text-gray-700">Message</label>
                                 <textarea
                                     name="message"
+                                    required
                                     value={form.message}
                                     onChange={handleChange}
                                     placeholder="write Your Message"
@@ -87,11 +144,16 @@ const ContactPaage = () => {
                             </div>
                             <button
                                 type="submit"
-                                className="self-start flex items-center gap-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-colors duration-200"
+                                disabled={isSubmitting}
+                                className="self-start flex items-center gap-2.5 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 disabled:cursor-not-allowed text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-colors duration-200"
                             >
                                 <FaPaperPlane />
-                                Send Message
+                                {isSubmitting ? 'Sending......' : 'Send Message'}
                             </button>
+
+                            {submitMessage && (
+                                <p className="text-sm font-medium text-gray-600">{submitMessage}</p>
+                            )}
                         </form>
                     </div>
 

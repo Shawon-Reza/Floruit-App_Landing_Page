@@ -1,10 +1,11 @@
 import React from 'react'
 import Header from './Header'
 import ImagePardHeroSection from './ImagePardHeroSection'
+import AnimatedHero from './AnimatedHero'
 
 const HeroPage = () => {
   return (
-    <div className='min-h-screen xl:px-6'>
+    <div className='xl:px-6'>
       <section>
         <Header></Header>
       </section>
@@ -13,6 +14,7 @@ const HeroPage = () => {
 
       <section>
         <ImagePardHeroSection></ImagePardHeroSection>
+        {/* <AnimatedHero></AnimatedHero> */}
       </section>
     </div>
   )
